@@ -16,4 +16,5 @@ FOUNDATION_EXPORT const unsigned char MoneoVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Moneo/PublicHeader.h>
 
-
+#import <Moneo/MoneoASTNode.h>
+#import <Moneo/MoneoParser.h>
