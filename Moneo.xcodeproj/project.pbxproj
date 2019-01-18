@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C97C104421F144D600D9D147 /* Moneo.h in Headers */ = {isa = PBXBuildFile; fileRef = C97C104221F144D600D9D147 /* Moneo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C97C104E21F1456000D9D147 /* MoneoParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C97C104A21F1455F00D9D147 /* MoneoParser.h */; };
-		C97C104F21F1456000D9D147 /* MoneoASTNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C97C104B21F1456000D9D147 /* MoneoASTNode.h */; };
+		C97C104E21F1456000D9D147 /* MoneoParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C97C104A21F1455F00D9D147 /* MoneoParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C97C104F21F1456000D9D147 /* MoneoASTNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C97C104B21F1456000D9D147 /* MoneoASTNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C97C105021F1456000D9D147 /* MoneoASTNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C104C21F1456000D9D147 /* MoneoASTNode.m */; };
 		C97C105121F1456000D9D147 /* MoneoParser.m.rl in Resources */ = {isa = PBXBuildFile; fileRef = C97C104D21F1456000D9D147 /* MoneoParser.m.rl */; };
 		C97C105321F1464700D9D147 /* MoneoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C105221F1464700D9D147 /* MoneoParser.m */; };
