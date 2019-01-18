@@ -9,7 +9,7 @@ Moneo exists for four reasons
 * I was using existing Mustache libraries however they were either not well maintained, not Objective-C friendly, or both.
 * Mustache contains a number of features that did not make sense in my context and created possible edge-cases I didn't want to have to deal with.
 * I needed to know what expressions are being used in a template and none of the Mustache processors provided easy access to that meaning I was going to have to hack them or write my own parser to pull that info out.
-* I'm rendering a lot of smallish templates very often, I need it as fast as possible. Moneo uses a Ragel generated parser and converts templates into a bytecode with a tiny VM for rendering. In future it will use `tcc` to dynamically generate rendering code.
+* I'm rendering a lot of smallish templates very often, I need it as fast as possible. Moneo uses a Ragel generated parser and does its best to reduce templates into a fast form for rendering (in the future we might explore other representations and even using the `tcc` library to dynamically generate rendering functions).
 
 ## Important
 
