@@ -18,3 +18,4 @@ FOUNDATION_EXPORT const unsigned char MoneoVersionString[];
 
 #import <Moneo/MoneoASTNode.h>
 #import <Moneo/MoneoParser.h>
+#import <Moneo/MoneoTemplate.h>

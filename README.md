@@ -13,7 +13,7 @@ Moneo exists for four reasons
 
 ## Important
 
-Moneo is a work in progress. It's on Github because I wanted to check that I could include it in my app, Mentat, using Carthage. Template parsing is mostly complete but rendering is not included yet. If you're interested please follow along but there's nothing you could use right now.
+Moneo is very much a work in progress. It's on Github because I wanted to check that I could include it in my app, Mentat, using Carthage. Template parsing is mostly complete but rendering is currently implemented using an AST walk and keypath evaluation is kind of hazy.
 
 ## Installation
 
