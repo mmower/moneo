@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class MoneoTemplateNode;
+
+@class MoneoTemplate;
 
 @interface MoneoParser : NSObject
 
-- (MoneoTemplateNode *)parseBuffer:(const char *)input length:(size_t)length;
-- (MoneoTemplateNode *)parse:(NSString *)input;
+- (MoneoTemplate *)parseTemplate:(NSString *)input;
 
 @end

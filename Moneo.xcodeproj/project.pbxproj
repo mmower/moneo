@@ -13,6 +13,8 @@
 		C97C105021F1456000D9D147 /* MoneoASTNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C104C21F1456000D9D147 /* MoneoASTNode.m */; };
 		C97C105121F1456000D9D147 /* MoneoParser.m.rl in Resources */ = {isa = PBXBuildFile; fileRef = C97C104D21F1456000D9D147 /* MoneoParser.m.rl */; };
 		C97C105321F1464700D9D147 /* MoneoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C105221F1464700D9D147 /* MoneoParser.m */; };
+		C97C105A21F1FD6200D9D147 /* MoneoTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = C97C105821F1FD6200D9D147 /* MoneoTemplate.h */; };
+		C97C105B21F1FD6200D9D147 /* MoneoTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C105921F1FD6200D9D147 /* MoneoTemplate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		C97C104D21F1456000D9D147 /* MoneoParser.m.rl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MoneoParser.m.rl; sourceTree = "<group>"; };
 		C97C105221F1464700D9D147 /* MoneoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneoParser.m; sourceTree = "<group>"; };
 		C97C105721F1E9F100D9D147 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		C97C105821F1FD6200D9D147 /* MoneoTemplate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneoTemplate.h; sourceTree = "<group>"; };
+		C97C105921F1FD6200D9D147 /* MoneoTemplate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneoTemplate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,13 +61,15 @@
 		C97C104121F144D600D9D147 /* Moneo */ = {
 			isa = PBXGroup;
 			children = (
-				C97C105221F1464700D9D147 /* MoneoParser.m */,
+				C97C104321F144D600D9D147 /* Info.plist */,
+				C97C104221F144D600D9D147 /* Moneo.h */,
 				C97C104B21F1456000D9D147 /* MoneoASTNode.h */,
 				C97C104C21F1456000D9D147 /* MoneoASTNode.m */,
 				C97C104A21F1455F00D9D147 /* MoneoParser.h */,
+				C97C105221F1464700D9D147 /* MoneoParser.m */,
 				C97C104D21F1456000D9D147 /* MoneoParser.m.rl */,
-				C97C104221F144D600D9D147 /* Moneo.h */,
-				C97C104321F144D600D9D147 /* Info.plist */,
+				C97C105821F1FD6200D9D147 /* MoneoTemplate.h */,
+				C97C105921F1FD6200D9D147 /* MoneoTemplate.m */,
 				C97C105721F1E9F100D9D147 /* README.md */,
 			);
 			path = Moneo;
@@ -79,6 +85,7 @@
 				C97C104E21F1456000D9D147 /* MoneoParser.h in Headers */,
 				C97C104421F144D600D9D147 /* Moneo.h in Headers */,
 				C97C104F21F1456000D9D147 /* MoneoASTNode.h in Headers */,
+				C97C105A21F1FD6200D9D147 /* MoneoTemplate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +160,7 @@
 			files = (
 				C97C105021F1456000D9D147 /* MoneoASTNode.m in Sources */,
 				C97C105321F1464700D9D147 /* MoneoParser.m in Sources */,
+				C97C105B21F1FD6200D9D147 /* MoneoTemplate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

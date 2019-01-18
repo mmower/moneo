@@ -11,18 +11,19 @@
 #import "MoneoParser.h"
 
 #import "MoneoASTNode.h"
+#import "MoneoTemplate.h"
 
 #import <string.h>
 
 /* Ragel Machine Definition */
 
 
-#line 123 "MoneoParser.m.rl"
+#line 124 "MoneoParser.m.rl"
 
 
 /* Ragel Working State */
 
-#line 26 "MoneoParser.m"
+#line 27 "MoneoParser.m"
 static const char _moneo_parser_actions[] = {
 	0, 1, 1, 1, 2, 1, 3, 1, 
 	7, 2, 4, 0, 2, 5, 0, 2, 
@@ -100,7 +101,7 @@ static const int moneo_parser_error = 0;
 static const int moneo_parser_en_main = 12;
 
 
-#line 127 "MoneoParser.m.rl"
+#line 128 "MoneoParser.m.rl"
 
 @interface MoneoParser ()
 
@@ -125,12 +126,12 @@ static const int moneo_parser_en_main = 12;
   self = [super init];
   if( self ) {
     
-#line 129 "MoneoParser.m"
+#line 130 "MoneoParser.m"
 	{
 	cs = moneo_parser_start;
 	}
 
-#line 151 "MoneoParser.m.rl"
+#line 152 "MoneoParser.m.rl"
   }
   return self;
 }
@@ -143,7 +144,7 @@ static const int moneo_parser_en_main = 12;
   _chunk_start = p;
   char *eof = pe;
   
-#line 147 "MoneoParser.m"
+#line 148 "MoneoParser.m"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -217,13 +218,13 @@ _match:
 		switch ( *_acts++ )
 		{
 	case 0:
-#line 30 "MoneoParser.m.rl"
+#line 31 "MoneoParser.m.rl"
 	{
     _chunk_start = p;
   }
 	break;
 	case 1:
-#line 34 "MoneoParser.m.rl"
+#line 35 "MoneoParser.m.rl"
 	{
     long length = p - _chunk_start;
     char buffer[length+1];
@@ -240,13 +241,13 @@ _match:
   }
 	break;
 	case 2:
-#line 49 "MoneoParser.m.rl"
+#line 50 "MoneoParser.m.rl"
 	{
     _keypath_start = p;
   }
 	break;
 	case 3:
-#line 53 "MoneoParser.m.rl"
+#line 54 "MoneoParser.m.rl"
 	{
     long length = p - _keypath_start;
     char buffer[length+1];
@@ -257,7 +258,7 @@ _match:
   }
 	break;
 	case 4:
-#line 62 "MoneoParser.m.rl"
+#line 63 "MoneoParser.m.rl"
 	{
     NSLog( @"*eval*" );
     MoneoEvalNode *node = [[MoneoEvalNode alloc] initWithParent:_curBlock keyPath:_keypath];
@@ -266,7 +267,7 @@ _match:
   }
 	break;
 	case 5:
-#line 69 "MoneoParser.m.rl"
+#line 70 "MoneoParser.m.rl"
 	{
     NSLog( @"*iter:%@*", _keypath );
     MoneoIterNode *node = [[MoneoIterNode alloc] initWithParent:_curBlock keyPath:_keypath];
@@ -276,7 +277,7 @@ _match:
   }
 	break;
 	case 6:
-#line 77 "MoneoParser.m.rl"
+#line 78 "MoneoParser.m.rl"
 	{
     NSLog( @"*clblk*" );
     _curBlock = _curBlock.parent;
@@ -284,12 +285,12 @@ _match:
   }
 	break;
 	case 7:
-#line 83 "MoneoParser.m.rl"
+#line 84 "MoneoParser.m.rl"
 	{
     NSLog( @"ERROR" );
   }
 	break;
-#line 293 "MoneoParser.m"
+#line 294 "MoneoParser.m"
 		}
 	}
 
@@ -306,13 +307,13 @@ _again:
 	while ( __nacts-- > 0 ) {
 		switch ( *__acts++ ) {
 	case 0:
-#line 30 "MoneoParser.m.rl"
+#line 31 "MoneoParser.m.rl"
 	{
     _chunk_start = p;
   }
 	break;
 	case 1:
-#line 34 "MoneoParser.m.rl"
+#line 35 "MoneoParser.m.rl"
 	{
     long length = p - _chunk_start;
     char buffer[length+1];
@@ -329,7 +330,7 @@ _again:
   }
 	break;
 	case 4:
-#line 62 "MoneoParser.m.rl"
+#line 63 "MoneoParser.m.rl"
 	{
     NSLog( @"*eval*" );
     MoneoEvalNode *node = [[MoneoEvalNode alloc] initWithParent:_curBlock keyPath:_keypath];
@@ -338,7 +339,7 @@ _again:
   }
 	break;
 	case 5:
-#line 69 "MoneoParser.m.rl"
+#line 70 "MoneoParser.m.rl"
 	{
     NSLog( @"*iter:%@*", _keypath );
     MoneoIterNode *node = [[MoneoIterNode alloc] initWithParent:_curBlock keyPath:_keypath];
@@ -348,7 +349,7 @@ _again:
   }
 	break;
 	case 6:
-#line 77 "MoneoParser.m.rl"
+#line 78 "MoneoParser.m.rl"
 	{
     NSLog( @"*clblk*" );
     _curBlock = _curBlock.parent;
@@ -356,12 +357,12 @@ _again:
   }
 	break;
 	case 7:
-#line 83 "MoneoParser.m.rl"
+#line 84 "MoneoParser.m.rl"
 	{
     NSLog( @"ERROR" );
   }
 	break;
-#line 365 "MoneoParser.m"
+#line 366 "MoneoParser.m"
 		}
 	}
 	}
@@ -369,13 +370,18 @@ _again:
 	_out: {}
 	}
 
-#line 163 "MoneoParser.m.rl"
+#line 164 "MoneoParser.m.rl"
   return template;
 }
 
-- (MoneoTemplateNode *)parse:(NSString *)input {
+- (MoneoTemplate *)parseTemplate:(NSString *)input {
   const char *buffer = [input cStringUsingEncoding:NSUTF8StringEncoding];
-  return [self parseBuffer:buffer length:strlen(buffer)];
+  MoneoTemplateNode *templateNode = [self parseBuffer:buffer length:strlen(buffer)];
+  if( templateNode ) {
+    return [[MoneoTemplate alloc] initWithAST:templateNode];
+  } else {
+    return nil;
+  }
 }
 
 @end

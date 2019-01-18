@@ -76,4 +76,7 @@ And that's it. There is no support for including other templates, reading templa
 
 Rendering happens in a context. This is passed to the `render` method of the `MoneoTemplate`.
 
+## Error Handling
+
+Right now there is none. (See Notes above!)
 

@@ -9,6 +9,7 @@
 #import "MoneoParser.h"
 
 #import "MoneoASTNode.h"
+#import "MoneoTemplate.h"
 
 #import <string.h>
 
@@ -163,9 +164,14 @@
   return template;
 }
 
-- (MoneoTemplateNode *)parse:(NSString *)input {
+- (MoneoTemplate *)parseTemplate:(NSString *)input {
   const char *buffer = [input cStringUsingEncoding:NSUTF8StringEncoding];
-  return [self parseBuffer:buffer length:strlen(buffer)];
+  MoneoTemplateNode *templateNode = [self parseBuffer:buffer length:strlen(buffer)];
+  if( templateNode ) {
+    return [[MoneoTemplate alloc] initWithAST:templateNode];
+  } else {
+    return nil;
+  }
 }
 
 @end
