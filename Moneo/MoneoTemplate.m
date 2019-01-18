@@ -10,55 +10,64 @@
 
 #import "MoneoASTNode.h"
 
-@interface MoneoTemplate ()
-
-@property MoneoTemplateNode *templateNode;
-
-@end
+NSString * const kOpEmit = @"EMIT";
+NSString * const kOpEval = @"EVAL";
+NSString * const kOpIter = @"ITER";
+NSString * const kOpMiss = @"MISS";
 
 @implementation MoneoTemplate
 
-- (instancetype)initWithAST:(MoneoTemplateNode *)node {
+- (instancetype)initWithAST:(MoneoTemplateNode *)templateNode {
   self = [self init];
   if( self ) {
-    _templateNode = node;
+    _compiled = [self compileBlockNode:templateNode];
   }
   return self;
 }
 
-- (NSString *)renderBlockNode:(MoneoBlockNode *)blockNode context:(id)context {
+- (NSArray *)compileBlockNode:(MoneoBlockNode *)node {
+  NSMutableArray *compiled = [NSMutableArray arrayWithCapacity:node.children.count];
+
+  for( MoneoASTNode *child in node.children ) {
+    NSArray *ops;
+    if( [child isKindOfClass:[MoneoEmitNode class]] ) {
+      ops = @[kOpEmit,((MoneoEmitNode*)child).chunk];
+    } else if( [child isKindOfClass:[MoneoEvalNode class]] ) {
+      ops = @[kOpEval,((MoneoEvalNode *)child).keyPath];
+    } else if( [child isKindOfClass:[MoneoIterNode class]] ) {
+      ops = @[kOpIter,((MoneoIterNode *)child).keyPath,[self compileBlockNode:(MoneoIterNode *)child]];
+    } else if( [child isKindOfClass:[MoneoMissingNode class]] ) {
+      ops = @[kOpMiss,((MoneoMissingNode *)child).keyPath,[self compileBlockNode:(MoneoMissingNode *)child]];
+    }
+    [compiled addObject:ops];
+  }
+
+  return [compiled copy];
+}
+
+- (NSString *)renderTree:(NSArray *)tree context:(id)context {
   NSMutableString *output = [NSMutableString string];
-  for( MoneoASTNode *node in _templateNode.children ) {
-    if( [node isKindOfClass:[MoneoEmitNode class]] ) {
-      MoneoEmitNode *emitNode = (MoneoEmitNode *)node;
-      [output appendString:emitNode.chunk];
-    } else if( [node isKindOfClass:[MoneoEvalNode class]] ) {
-      MoneoEvalNode *evalNode = (MoneoEvalNode *)node;
-      NSString *keyPath = evalNode.keyPath;
-      NSString *value = [context valueForKeyPath:keyPath];
-      [output appendString:value];
-    } else if( [node isKindOfClass:[MoneoIterNode class]] ) {
-      MoneoIterNode *iterNode = (MoneoIterNode *)node;
-      NSString *keyPath = iterNode.keyPath;
-      id subcontext = [context valueForKeyPath:keyPath];
-      [output appendString:[self renderBlockNode:iterNode context:subcontext]];
-    } else if( [node isKindOfClass:[MoneoMissingNode class]] ) {
-      MoneoMissingNode *missingNode = (MoneoMissingNode *)node;
-      NSString *keyPath = missingNode.keyPath;
-      if( ![context valueForKeyPath:keyPath] ) {
-        [output appendString:[self renderBlockNode:missingNode context:context]];
-      }
+
+  for( NSArray *op in tree ) {
+    NSString *opCode = [op objectAtIndex:0];
+    if( opCode == kOpEmit ) {
+      [output appendString:[op objectAtIndex:1]];
+    } else if( opCode == kOpEval ) {
+      [output appendString:[context valueForKeyPath:[op objectAtIndex:1]]];
+    } else if( opCode == kOpIter ) {
+      [output appendString:[self renderTree:[op objectAtIndex:2] context:[context valueForKeyPath:[op objectAtIndex:1]]]];
     } else {
-      @throw [NSException exceptionWithName:@"Moneo template rendering error"
-                                     reason:[NSString stringWithFormat:@"Encountered unexpected AST node class %@",[node className]]
-                                   userInfo:nil];
+      if( ![context valueForKeyPath:[op objectAtIndex:1]] ) {
+        [output appendString:[self renderTree:[op objectAtIndex:2] context:context]];
+      }
     }
   }
+
   return output;
 }
 
 - (NSString *)render:(id)context {
-  return [self renderBlockNode:_templateNode context:context];
+  return [self renderTree:_compiled context:context];
 }
 
 @end

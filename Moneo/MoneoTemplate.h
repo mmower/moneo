@@ -12,7 +12,9 @@
 
 @interface MoneoTemplate : NSObject
 
-- (instancetype)initWithAST:(MoneoTemplateNode *)node;
+@property NSArray *compiled;
+
+- (instancetype)initWithAST:(MoneoTemplateNode *)templateNode;
 
 - (NSString *)render:(id)context;
 

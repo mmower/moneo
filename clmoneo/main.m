@@ -44,6 +44,8 @@ int main(int argc, const char * argv[]) {
     if( !template ) {
       NSLog( @"Error: Cannot parse template." );
       exit( -3 );
+    } else {
+      NSLog( @"Compiled Template: %@", template.compiled );
     }
 
     NSString *output = [template render:context];
