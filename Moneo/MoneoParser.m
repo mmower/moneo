@@ -235,7 +235,7 @@ _match:
     if( ![_chunk isEqualToString:@""] ) {
        MoneoEmitNode *node = [[MoneoEmitNode alloc] initWithParent:_curBlock chunk:_chunk];
         [_curBlock addChild:node];
-        NSLog( @">CHUNK = %@", _chunk );
+        //NSLog( @">CHUNK = %@", _chunk );
     }
     _chunk_start = p;
   }
@@ -254,34 +254,34 @@ _match:
     memset( buffer, 0x00, length+1 );
     strncpy( buffer, _keypath_start, p-_keypath_start );
     _keypath = [[NSString alloc] initWithCString:buffer encoding:NSUTF8StringEncoding];
-    NSLog( @"*KEYPATH = %@", _keypath );
+    //NSLog( @"*KEYPATH = %@", _keypath );
   }
 	break;
 	case 4:
 #line 63 "MoneoParser.m.rl"
 	{
-    NSLog( @"*eval*" );
+    //NSLog( @"*eval*" );
     MoneoEvalNode *node = [[MoneoEvalNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
-    NSLog( @"curBlock=%@", _curBlock );
+    //NSLog( @"curBlock=%@", _curBlock );
   }
 	break;
 	case 5:
 #line 70 "MoneoParser.m.rl"
 	{
-    NSLog( @"*iter:%@*", _keypath );
+    //NSLog( @"*iter:%@*", _keypath );
     MoneoIterNode *node = [[MoneoIterNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
     _curBlock = node;
-    NSLog( @"curBlock=%@", _curBlock );
+    //NSLog( @"curBlock=%@", _curBlock );
   }
 	break;
 	case 6:
 #line 78 "MoneoParser.m.rl"
 	{
-    NSLog( @"*clblk*" );
+    //NSLog( @"*clblk*" );
     _curBlock = _curBlock.parent;
-    NSLog( @"curBlock=%@", _curBlock );
+    //NSLog( @"curBlock=%@", _curBlock );
   }
 	break;
 	case 7:
@@ -324,7 +324,7 @@ _again:
     if( ![_chunk isEqualToString:@""] ) {
        MoneoEmitNode *node = [[MoneoEmitNode alloc] initWithParent:_curBlock chunk:_chunk];
         [_curBlock addChild:node];
-        NSLog( @">CHUNK = %@", _chunk );
+        //NSLog( @">CHUNK = %@", _chunk );
     }
     _chunk_start = p;
   }
@@ -332,28 +332,28 @@ _again:
 	case 4:
 #line 63 "MoneoParser.m.rl"
 	{
-    NSLog( @"*eval*" );
+    //NSLog( @"*eval*" );
     MoneoEvalNode *node = [[MoneoEvalNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
-    NSLog( @"curBlock=%@", _curBlock );
+    //NSLog( @"curBlock=%@", _curBlock );
   }
 	break;
 	case 5:
 #line 70 "MoneoParser.m.rl"
 	{
-    NSLog( @"*iter:%@*", _keypath );
+    //NSLog( @"*iter:%@*", _keypath );
     MoneoIterNode *node = [[MoneoIterNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
     _curBlock = node;
-    NSLog( @"curBlock=%@", _curBlock );
+    //NSLog( @"curBlock=%@", _curBlock );
   }
 	break;
 	case 6:
 #line 78 "MoneoParser.m.rl"
 	{
-    NSLog( @"*clblk*" );
+    //NSLog( @"*clblk*" );
     _curBlock = _curBlock.parent;
-    NSLog( @"curBlock=%@", _curBlock );
+    //NSLog( @"curBlock=%@", _curBlock );
   }
 	break;
 	case 7:

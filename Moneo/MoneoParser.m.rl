@@ -42,7 +42,7 @@
     if( ![_chunk isEqualToString:@""] ) {
        MoneoEmitNode *node = [[MoneoEmitNode alloc] initWithParent:_curBlock chunk:_chunk];
         [_curBlock addChild:node];
-        NSLog( @">CHUNK = %@", _chunk );
+        //NSLog( @">CHUNK = %@", _chunk );
     }
     _chunk_start = fpc;
   }
@@ -57,28 +57,28 @@
     memset( buffer, 0x00, length+1 );
     strncpy( buffer, _keypath_start, fpc-_keypath_start );
     _keypath = [[NSString alloc] initWithCString:buffer encoding:NSUTF8StringEncoding];
-    NSLog( @"*KEYPATH = %@", _keypath );
+    //NSLog( @"*KEYPATH = %@", _keypath );
   }
 
   action eval {
-    NSLog( @"*eval*" );
+    //NSLog( @"*eval*" );
     MoneoEvalNode *node = [[MoneoEvalNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
-    NSLog( @"curBlock=%@", _curBlock );
+    //NSLog( @"curBlock=%@", _curBlock );
   }
 
   action iter {
-    NSLog( @"*iter:%@*", _keypath );
+    //NSLog( @"*iter:%@*", _keypath );
     MoneoIterNode *node = [[MoneoIterNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
     _curBlock = node;
-    NSLog( @"curBlock=%@", _curBlock );
+    //NSLog( @"curBlock=%@", _curBlock );
   }
 
   action clblk {
-    NSLog( @"*clblk*" );
+    //NSLog( @"*clblk*" );
     _curBlock = _curBlock.parent;
-    NSLog( @"curBlock=%@", _curBlock );
+    //NSLog( @"curBlock=%@", _curBlock );
   }
 
   action alert_error {
