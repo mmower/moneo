@@ -24,6 +24,7 @@
 		C97C104C21F1456000D9D147 /* MoneoASTNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneoASTNode.m; sourceTree = "<group>"; };
 		C97C104D21F1456000D9D147 /* MoneoParser.m.rl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MoneoParser.m.rl; sourceTree = "<group>"; };
 		C97C105221F1464700D9D147 /* MoneoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneoParser.m; sourceTree = "<group>"; };
+		C97C105721F1E9F100D9D147 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +64,7 @@
 				C97C104D21F1456000D9D147 /* MoneoParser.m.rl */,
 				C97C104221F144D600D9D147 /* Moneo.h */,
 				C97C104321F144D600D9D147 /* Info.plist */,
+				C97C105721F1E9F100D9D147 /* README.md */,
 			);
 			path = Moneo;
 			sourceTree = "<group>";
