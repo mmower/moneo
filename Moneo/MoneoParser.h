@@ -13,6 +13,8 @@
 
 @interface MoneoParser : NSObject
 
++ (MoneoTemplate *)parseTemplate:(NSString *)input;
+
 - (MoneoTemplate *)parseTemplate:(NSString *)input;
 
 @end

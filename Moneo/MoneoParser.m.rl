@@ -145,6 +145,11 @@
 
 @synthesize cs = cs;
 
++ (MoneoTemplate *)parseTemplate:(NSString *)input {
+  MoneoParser *parser = [[self alloc] init];
+  return [parser parseTemplate:input];
+}
+
 - (instancetype)init {
   self = [super init];
   if( self ) {

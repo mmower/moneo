@@ -122,16 +122,21 @@ static const int moneo_parser_en_main = 12;
 
 @synthesize cs = cs;
 
++ (MoneoTemplate *)parseTemplate:(NSString *)input {
+  MoneoParser *parser = [[self alloc] init];
+  return [parser parseTemplate:input];
+}
+
 - (instancetype)init {
   self = [super init];
   if( self ) {
     
-#line 130 "MoneoParser.m"
+#line 135 "MoneoParser.m"
 	{
 	cs = moneo_parser_start;
 	}
 
-#line 152 "MoneoParser.m.rl"
+#line 157 "MoneoParser.m.rl"
   }
   return self;
 }
@@ -144,7 +149,7 @@ static const int moneo_parser_en_main = 12;
   _chunk_start = p;
   char *eof = pe;
   
-#line 148 "MoneoParser.m"
+#line 153 "MoneoParser.m"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -290,7 +295,7 @@ _match:
     NSLog( @"ERROR" );
   }
 	break;
-#line 294 "MoneoParser.m"
+#line 299 "MoneoParser.m"
 		}
 	}
 
@@ -362,7 +367,7 @@ _again:
     NSLog( @"ERROR" );
   }
 	break;
-#line 366 "MoneoParser.m"
+#line 371 "MoneoParser.m"
 		}
 	}
 	}
@@ -370,7 +375,7 @@ _again:
 	_out: {}
 	}
 
-#line 164 "MoneoParser.m.rl"
+#line 169 "MoneoParser.m.rl"
   return template;
 }
 
