@@ -122,9 +122,9 @@ static const int moneo_parser_en_main = 12;
 
 @synthesize cs = cs;
 
-+ (MoneoTemplate *)parseTemplate:(NSString *)input {
++ (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error {
   MoneoParser *parser = [[self alloc] init];
-  return [parser parseTemplate:input];
+  return [parser parseTemplate:input error:error];
 }
 
 - (instancetype)init {
@@ -379,7 +379,11 @@ _again:
   return template;
 }
 
-- (MoneoTemplate *)parseTemplate:(NSString *)input {
+- (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error {
+  if( input == nil ) {
+    *error = [NSError errorWithDomain:@"Moneo" code:MoneoNilTemplateError userInfo:@{NSLocalizedDescriptionKey:@"Template 'input' parameter may not be nil."}];
+    return nil;
+  }
   const char *buffer = [input cStringUsingEncoding:NSUTF8StringEncoding];
   MoneoTemplateNode *templateNode = [self parseBuffer:buffer length:strlen(buffer)];
   if( templateNode ) {

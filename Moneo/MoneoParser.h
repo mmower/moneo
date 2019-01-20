@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+enum {
+  MoneoNilTemplateError,
+} MoneoErrorCodes;
 
 @class MoneoTemplate;
 
 @interface MoneoParser : NSObject
 
-+ (MoneoTemplate *)parseTemplate:(NSString *)input;
++ (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error;
 
-- (MoneoTemplate *)parseTemplate:(NSString *)input;
+- (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error;
 
 @end

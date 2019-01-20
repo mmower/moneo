@@ -40,9 +40,16 @@ int main(int argc, const char * argv[]) {
       exit( -2 );
     }
 
-    MoneoTemplate *template = [parser parseTemplate:input];
+    NSError *error = nil;
+
+    MoneoTemplate *template = [parser parseTemplate:input error:&error];
     if( !template ) {
-      NSLog( @"Error: Cannot parse template." );
+      if( error ) {
+        NSLog( @"Error: Cannot parse template: %@", error.localizedDescription );
+      } else {
+        NSLog( @"Error: Cannot parse template." );
+      }
+
       exit( -3 );
     } else {
       NSLog( @"Compiled Template: %@", template.compiled );
