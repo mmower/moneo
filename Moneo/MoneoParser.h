@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-enum {
+typedef enum {
   MoneoNilTemplateError,
 } MoneoErrorCodes;
 
