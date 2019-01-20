@@ -20,12 +20,14 @@ NSString * const kOpMiss = @"MISS";
 - (instancetype)initWithAST:(MoneoTemplateNode *)templateNode {
   self = [self init];
   if( self ) {
-    _compiled = [self compileBlockNode:templateNode];
+    NSMutableArray *keyPaths = [NSMutableArray array];
+    _compiled = [self compileBlockNode:templateNode keyPathsOut:keyPaths];
+    _keyPaths = [keyPaths copy];
   }
   return self;
 }
 
-- (NSArray *)compileBlockNode:(MoneoBlockNode *)node {
+- (NSArray *)compileBlockNode:(MoneoBlockNode *)node keyPathsOut:(NSMutableArray *)keyPaths {
   NSMutableArray *compiled = [NSMutableArray arrayWithCapacity:node.children.count];
 
   for( MoneoASTNode *child in node.children ) {
@@ -33,11 +35,17 @@ NSString * const kOpMiss = @"MISS";
     if( [child isKindOfClass:[MoneoEmitNode class]] ) {
       ops = @[kOpEmit,((MoneoEmitNode*)child).chunk];
     } else if( [child isKindOfClass:[MoneoEvalNode class]] ) {
-      ops = @[kOpEval,((MoneoEvalNode *)child).keyPath];
+      NSString *keyPath = ((MoneoEvalNode *)child).keyPath;
+      ops = @[kOpEval,keyPath];
+      [keyPaths addObject:keyPath];
     } else if( [child isKindOfClass:[MoneoIterNode class]] ) {
-      ops = @[kOpIter,((MoneoIterNode *)child).keyPath,[self compileBlockNode:(MoneoIterNode *)child]];
+      NSString *keyPath = ((MoneoIterNode *)child).keyPath;
+      ops = @[kOpIter,keyPath,[self compileBlockNode:(MoneoIterNode *)child keyPathsOut:keyPaths]];
+      [keyPaths addObject:keyPath];
     } else if( [child isKindOfClass:[MoneoMissingNode class]] ) {
-      ops = @[kOpMiss,((MoneoMissingNode *)child).keyPath,[self compileBlockNode:(MoneoMissingNode *)child]];
+      NSString *keyPath = ((MoneoMissingNode *)child).keyPath;
+      ops = @[kOpMiss,keyPath,[self compileBlockNode:(MoneoMissingNode *)child keyPathsOut:keyPaths]];
+      [keyPaths addObject:keyPath];
     }
     [compiled addObject:ops];
   }

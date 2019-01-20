@@ -17,7 +17,19 @@
 		C97C105B21F1FD6200D9D147 /* MoneoTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C105921F1FD6200D9D147 /* MoneoTemplate.m */; };
 		C97C106321F2048400D9D147 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C106221F2048400D9D147 /* main.m */; };
 		C97C106821F2073A00D9D147 /* Moneo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97C103F21F144D600D9D147 /* Moneo.framework */; };
+		C97C107121F4DC1300D9D147 /* MoneoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C97C107021F4DC1300D9D147 /* MoneoTests.m */; };
+		C97C107321F4DC1400D9D147 /* Moneo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97C103F21F144D600D9D147 /* Moneo.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C97C107421F4DC1400D9D147 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C97C103621F144D600D9D147 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C97C103E21F144D600D9D147;
+			remoteInfo = Moneo;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C97C105E21F2048400D9D147 /* CopyFiles */ = {
@@ -45,6 +57,9 @@
 		C97C105921F1FD6200D9D147 /* MoneoTemplate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneoTemplate.m; sourceTree = "<group>"; };
 		C97C106021F2048400D9D147 /* clmoneo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = clmoneo; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C106221F2048400D9D147 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C97C106E21F4DC1300D9D147 /* MoneoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C97C107021F4DC1300D9D147 /* MoneoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneoTests.m; sourceTree = "<group>"; };
+		C97C107221F4DC1400D9D147 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +78,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C97C106B21F4DC1300D9D147 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C97C107321F4DC1400D9D147 /* Moneo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,6 +94,7 @@
 			children = (
 				C97C104121F144D600D9D147 /* Moneo */,
 				C97C106121F2048400D9D147 /* clmoneo */,
+				C97C106F21F4DC1300D9D147 /* MoneoTests */,
 				C97C104021F144D600D9D147 /* Products */,
 				C97C106721F2073A00D9D147 /* Frameworks */,
 			);
@@ -81,6 +105,7 @@
 			children = (
 				C97C103F21F144D600D9D147 /* Moneo.framework */,
 				C97C106021F2048400D9D147 /* clmoneo */,
+				C97C106E21F4DC1300D9D147 /* MoneoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +140,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C97C106F21F4DC1300D9D147 /* MoneoTests */ = {
+			isa = PBXGroup;
+			children = (
+				C97C107021F4DC1300D9D147 /* MoneoTests.m */,
+				C97C107221F4DC1400D9D147 /* Info.plist */,
+			);
+			path = MoneoTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +203,24 @@
 			productReference = C97C106021F2048400D9D147 /* clmoneo */;
 			productType = "com.apple.product-type.tool";
 		};
+		C97C106D21F4DC1300D9D147 /* MoneoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C97C107621F4DC1400D9D147 /* Build configuration list for PBXNativeTarget "MoneoTests" */;
+			buildPhases = (
+				C97C106A21F4DC1300D9D147 /* Sources */,
+				C97C106B21F4DC1300D9D147 /* Frameworks */,
+				C97C106C21F4DC1300D9D147 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C97C107521F4DC1400D9D147 /* PBXTargetDependency */,
+			);
+			name = MoneoTests;
+			productName = MoneoTests;
+			productReference = C97C106E21F4DC1300D9D147 /* MoneoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -183,6 +235,10 @@
 						ProvisioningStyle = Automatic;
 					};
 					C97C105F21F2048400D9D147 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					C97C106D21F4DC1300D9D147 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
@@ -202,6 +258,7 @@
 			targets = (
 				C97C103E21F144D600D9D147 /* Moneo */,
 				C97C105F21F2048400D9D147 /* clmoneo */,
+				C97C106D21F4DC1300D9D147 /* MoneoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -212,6 +269,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C97C105121F1456000D9D147 /* MoneoParser.m.rl in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C97C106C21F4DC1300D9D147 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +300,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C97C106A21F4DC1300D9D147 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C97C107121F4DC1300D9D147 /* MoneoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C97C107521F4DC1400D9D147 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C97C103E21F144D600D9D147 /* Moneo */;
+			targetProxy = C97C107421F4DC1400D9D147 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C97C104521F144D600D9D147 /* Debug */ = {
@@ -404,6 +484,30 @@
 			};
 			name = Release;
 		};
+		C97C107721F4DC1400D9D147 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MoneoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.taon.MoneoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C97C107821F4DC1400D9D147 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MoneoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.taon.MoneoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -430,6 +534,15 @@
 			buildConfigurations = (
 				C97C106521F2048400D9D147 /* Debug */,
 				C97C106621F2048400D9D147 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C97C107621F4DC1400D9D147 /* Build configuration list for PBXNativeTarget "MoneoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C97C107721F4DC1400D9D147 /* Debug */,
+				C97C107821F4DC1400D9D147 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

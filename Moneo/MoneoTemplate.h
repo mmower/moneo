@@ -13,6 +13,7 @@
 @interface MoneoTemplate : NSObject
 
 @property NSArray *compiled;
+@property NSArray *keyPaths;
 
 - (instancetype)initWithAST:(MoneoTemplateNode *)templateNode;
 

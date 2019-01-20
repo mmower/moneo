@@ -20,9 +20,9 @@
 
   # Character Classes
 
-  open = '{' :> '{';
-  close = '}' :> '}';
-  keypath = alnum+;
+  open = '{' . '{';
+  close = '}' . '}';
+  keypath = ( alnum | graph )+ -- '}';
   eval = [=];
   iter = '@';
   cblk = '/';
