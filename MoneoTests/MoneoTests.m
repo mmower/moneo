@@ -27,6 +27,21 @@
     [super tearDown];
 }
 
+- (void)testParseExample1 {
+  MoneoParser *p = [[MoneoParser alloc] init];
+  NSError *error = nil;
+  MoneoTemplate *t = [p parseTemplate:@"<p>{{=thing/note.textValue}}</p>" error:&error];
+  XCTAssertNotNil( t );
+
+  NSArray *op1 = @[@"EMIT",@"<p>"];
+  NSArray *op2 = @[@"EVAL",@"thing/note.textValue"];
+  NSArray *op3 = @[@"EMIT",@"</p>"];
+  NSArray *output = @[op1,op2,op3];
+  XCTAssertEqualObjects( output, t.compiled );
+
+//  XCTAssertEqualObjects( @[@[@"EMIT",@"<p>"],@[@"EVAL",@"thing/note.textValue"],@[@"EMIT",@"</p>"]], t.compiled );
+}
+
 - (void)testParseKeyPath {
   MoneoParser *p = [[MoneoParser alloc] init];
   NSError *error = nil;
