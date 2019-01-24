@@ -10,10 +10,7 @@
 
 #import "MoneoASTNode.h"
 
-NSString * const kOpEmit = @"EMIT";
-NSString * const kOpEval = @"EVAL";
-NSString * const kOpIter = @"ITER";
-NSString * const kOpMiss = @"MISS";
+typedef void (^OpBlock)( NSMutableString *output, id context );
 
 @implementation MoneoTemplate
 
@@ -31,23 +28,41 @@ NSString * const kOpMiss = @"MISS";
   NSMutableArray *compiled = [NSMutableArray arrayWithCapacity:node.children.count];
 
   for( MoneoASTNode *child in node.children ) {
-    NSArray *ops;
     if( [child isKindOfClass:[MoneoEmitNode class]] ) {
-      ops = @[kOpEmit,((MoneoEmitNode*)child).chunk];
+      [compiled addObject:^( NSMutableString *output, id context ) {
+        [output appendString:((MoneoEmitNode*)child).chunk];
+      }];
     } else if( [child isKindOfClass:[MoneoEvalNode class]] ) {
       NSString *keyPath = ((MoneoEvalNode *)child).keyPath;
-      ops = @[kOpEval,keyPath];
+      [compiled addObject:^( NSMutableString *output, id context ) {
+        [output appendString:[context valueForKeyPath:keyPath]];
+      }];
       [keyPaths addObject:keyPath];
     } else if( [child isKindOfClass:[MoneoIterNode class]] ) {
       NSString *keyPath = ((MoneoIterNode *)child).keyPath;
-      ops = @[kOpIter,keyPath,[self compileBlockNode:(MoneoIterNode *)child keyPathsOut:keyPaths]];
       [keyPaths addObject:keyPath];
+      NSArray *compiledChildren = [self compileBlockNode:((MoneoIterNode *)child) keyPathsOut:keyPaths];
+      [compiled addObject:^( NSMutableString *output, id context ) {
+        id obj = [context valueForKeyPath:keyPath];
+        if( [obj conformsToProtocol:@protocol(NSFastEnumeration)] ) {
+          for( id item in obj ) {
+            [output appendString:[self renderTree:compiledChildren context:item]];
+          }
+        } else {
+          [output appendString:[self renderTree:compiledChildren context:obj]];
+        }
+      }];
     } else if( [child isKindOfClass:[MoneoMissingNode class]] ) {
       NSString *keyPath = ((MoneoMissingNode *)child).keyPath;
-      ops = @[kOpMiss,keyPath,[self compileBlockNode:(MoneoMissingNode *)child keyPathsOut:keyPaths]];
       [keyPaths addObject:keyPath];
+      NSArray *compiledChildren = [self compileBlockNode:((MoneoIterNode *)child) keyPathsOut:keyPaths];
+      [compiled addObject:^( NSMutableString *output, id context ) {
+        id obj = [context valueForKeyPath:keyPath];
+        if( !obj ) {
+          [output appendString:[self renderTree:compiledChildren context:context]];
+        }
+      }];
     }
-    [compiled addObject:ops];
   }
 
   return [compiled copy];
@@ -56,19 +71,8 @@ NSString * const kOpMiss = @"MISS";
 - (NSString *)renderTree:(NSArray *)tree context:(id)context {
   NSMutableString *output = [NSMutableString string];
 
-  for( NSArray *op in tree ) {
-    NSString *opCode = [op objectAtIndex:0];
-    if( opCode == kOpEmit ) {
-      [output appendString:[op objectAtIndex:1]];
-    } else if( opCode == kOpEval ) {
-      [output appendString:[context valueForKeyPath:[op objectAtIndex:1]]];
-    } else if( opCode == kOpIter ) {
-      [output appendString:[self renderTree:[op objectAtIndex:2] context:[context valueForKeyPath:[op objectAtIndex:1]]]];
-    } else {
-      if( ![context valueForKeyPath:[op objectAtIndex:1]] ) {
-        [output appendString:[self renderTree:[op objectAtIndex:2] context:context]];
-      }
-    }
+  for( OpBlock op in tree ) {
+    op( output, context );
   }
 
   return output;
