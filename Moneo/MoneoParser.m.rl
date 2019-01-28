@@ -15,6 +15,8 @@
 
 /* Ragel Machine Definition */
 
+//#define DEBUG_LOG
+
 %%{
   machine moneo_parser;
 
@@ -42,7 +44,9 @@
     if( ![_chunk isEqualToString:@""] ) {
        MoneoEmitNode *node = [[MoneoEmitNode alloc] initWithParent:_curBlock chunk:_chunk];
         [_curBlock addChild:node];
-//        NSLog( @">CHUNK = %@", _chunk );
+        #ifdef DEBUG_LOG
+        NSLog( @">CHUNK = %@", _chunk );
+        #endif
     }
     _chunk_start = fpc;
   }
@@ -57,32 +61,48 @@
     memset( buffer, 0x00, length+1 );
     strncpy( buffer, _keypath_start, fpc-_keypath_start );
     _keypath = [[NSString alloc] initWithCString:buffer encoding:NSUTF8StringEncoding];
-//    NSLog( @"*KEYPATH = %@", _keypath );
+    #ifdef DEBUG_LOG
+    NSLog( @"*KEYPATH = %@", _keypath );
+    #endif
   }
 
   action eval {
-//    NSLog( @"*eval*" );
     MoneoEvalNode *node = [[MoneoEvalNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
-//    NSLog( @"curBlock=%@", _curBlock );
+    #ifdef DEBUG_LOG
+    NSLog( @"*EVAL* curBlock=%@", _curBlock );
+    #endif
   }
 
   action iter {
-//    NSLog( @"*iter:%@*", _keypath );
     MoneoIterNode *node = [[MoneoIterNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
     _curBlock = node;
-//    NSLog( @"curBlock=%@", _curBlock );
+    #ifdef DEBUG_LOG
+    NSLog( @"*ITER* curBlock=%@", _curBlock );
+    #endif
+  }
+
+  action miss {
+    MoneoMissingNode *node = [[MoneoMissingNode alloc] initWithParent:_curBlock keyPath:_keypath];
+    [_curBlock addChild:node];
+    _curBlock = node;
+    #ifdef DEBUG_LOG
+    NSLog( @"*MISS* curBlock=%@", _curBlock );
+    #endif
   }
 
   action clblk {
-//    NSLog( @"*clblk*" );
     _curBlock = _curBlock.parent;
-//    NSLog( @"curBlock=%@", _curBlock );
   }
 
   action alert_error {
-    NSLog( @"ERROR" );
+    self.error = [NSError errorWithDomain:@"Moneo"
+                                     code:MoneoParsingTemplateError
+                                 userInfo:@{NSLocalizedDescriptionKey:@"Template did not parse correctly."}];
+                                 #ifdef DEBUG_LOG
+                                 NSLog( @"*ERROR*" );
+                                 #endif
   }
 
   eval_block = (
@@ -103,6 +123,15 @@
     close %iter %mark
   ) >chunk_end;
 
+  miss_block = (
+    open
+    miss
+    space*
+    keypath >keypath_start %keypath_end
+    space*
+    close %miss %mark
+    ) >chunk_end;
+
   close_block = (
     open
     cblk
@@ -116,6 +145,7 @@
   body = (
     eval_block
     | iter_block
+    | miss_block
     | close_block
     | chunk
   ) %eof(chunk_end);
@@ -145,14 +175,10 @@
 
 @synthesize cs = cs;
 
-+ (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error {
-  MoneoParser *parser = [[self alloc] init];
-  return [parser parseTemplate:input error:error];
-}
-
 - (instancetype)init {
   self = [super init];
   if( self ) {
+    _error = nil;
     %% write init;
   }
   return self;
@@ -169,9 +195,11 @@
   return template;
 }
 
-- (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error {
+- (MoneoTemplate *)parseTemplate:(NSString *)input {
   if( input == nil ) {
-    *error = [NSError errorWithDomain:@"Moneo" code:MoneoNilTemplateError userInfo:@{NSLocalizedDescriptionKey:@"Template 'input' parameter may not be nil."}];
+    self.error = [NSError errorWithDomain:@"Moneo"
+                                code:MoneoNilTemplateError
+                            userInfo:@{NSLocalizedDescriptionKey:@"Template 'input' parameter may not be nil."}];
     return nil;
   }
   const char *buffer = [input cStringUsingEncoding:NSUTF8StringEncoding];

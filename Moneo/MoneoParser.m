@@ -17,87 +17,97 @@
 
 /* Ragel Machine Definition */
 
+//#define DEBUG_LOG
 
-#line 124 "MoneoParser.m.rl"
+
+#line 154 "MoneoParser.m.rl"
 
 
 /* Ragel Working State */
 
-#line 27 "MoneoParser.m"
+#line 29 "MoneoParser.m"
 static const char _moneo_parser_actions[] = {
 	0, 1, 1, 1, 2, 1, 3, 1, 
-	7, 2, 4, 0, 2, 5, 0, 2, 
-	6, 0, 3, 4, 0, 1, 3, 5, 
-	0, 1, 3, 6, 0, 1
+	8, 2, 4, 0, 2, 5, 0, 2, 
+	6, 0, 2, 7, 0, 3, 4, 0, 
+	1, 3, 5, 0, 1, 3, 6, 0, 
+	1, 3, 7, 0, 1
 };
 
 static const char _moneo_parser_key_offsets[] = {
-	0, 0, 3, 4, 5, 11, 17, 21, 
-	22, 28, 34, 38, 39, 40, 41, 42, 
-	43, 44
+	0, 0, 4, 10, 16, 20, 21, 22, 
+	23, 29, 35, 39, 40, 46, 52, 56, 
+	57, 58, 59, 60, 61, 62, 63
 };
 
 static const char _moneo_parser_trans_keys[] = {
-	47, 61, 64, 125, 125, 32, 126, 9, 
-	13, 33, 124, 32, 125, 9, 13, 33, 
-	126, 32, 125, 9, 13, 125, 32, 126, 
-	9, 13, 33, 124, 32, 125, 9, 13, 
-	33, 126, 32, 125, 9, 13, 125, 123, 
-	123, 123, 123, 123, 123, 0
+	33, 47, 61, 64, 32, 126, 9, 13, 
+	33, 124, 32, 125, 9, 13, 33, 126, 
+	32, 125, 9, 13, 125, 125, 125, 32, 
+	126, 9, 13, 33, 124, 32, 125, 9, 
+	13, 33, 126, 32, 125, 9, 13, 125, 
+	32, 126, 9, 13, 33, 124, 32, 125, 
+	9, 13, 33, 126, 32, 125, 9, 13, 
+	125, 123, 123, 123, 123, 123, 123, 123, 
+	0
 };
 
 static const char _moneo_parser_single_lengths[] = {
-	0, 3, 1, 1, 2, 2, 2, 1, 
-	2, 2, 2, 1, 1, 1, 1, 1, 
-	1, 1
+	0, 4, 2, 2, 2, 1, 1, 1, 
+	2, 2, 2, 1, 2, 2, 2, 1, 
+	1, 1, 1, 1, 1, 1, 1
 };
 
 static const char _moneo_parser_range_lengths[] = {
-	0, 0, 0, 0, 2, 2, 1, 0, 
-	2, 2, 1, 0, 0, 0, 0, 0, 
-	0, 0
+	0, 0, 2, 2, 1, 0, 0, 0, 
+	2, 2, 1, 0, 2, 2, 1, 0, 
+	0, 0, 0, 0, 0, 0, 0
 };
 
 static const char _moneo_parser_index_offsets[] = {
-	0, 0, 4, 6, 8, 13, 18, 22, 
-	24, 29, 34, 38, 40, 42, 44, 46, 
-	48, 50
+	0, 0, 5, 10, 15, 19, 21, 23, 
+	25, 30, 35, 39, 41, 46, 51, 55, 
+	57, 59, 61, 63, 65, 67, 69
 };
 
 static const char _moneo_parser_trans_targs[] = {
-	2, 4, 8, 0, 3, 0, 15, 0, 
-	4, 5, 4, 5, 0, 6, 7, 6, 
-	5, 0, 6, 7, 6, 0, 16, 0, 
-	8, 9, 8, 9, 0, 10, 11, 10, 
-	9, 0, 10, 11, 10, 0, 17, 0, 
-	14, 13, 14, 13, 1, 13, 14, 13, 
-	14, 13, 14, 13, 0
+	2, 6, 8, 12, 0, 2, 3, 2, 
+	3, 0, 4, 5, 4, 3, 0, 4, 
+	5, 4, 0, 19, 0, 7, 0, 20, 
+	0, 8, 9, 8, 9, 0, 10, 11, 
+	10, 9, 0, 10, 11, 10, 0, 21, 
+	0, 12, 13, 12, 13, 0, 14, 15, 
+	14, 13, 0, 14, 15, 14, 0, 22, 
+	0, 18, 17, 18, 17, 1, 17, 18, 
+	17, 18, 17, 18, 17, 18, 17, 0
 };
 
 static const char _moneo_parser_trans_actions[] = {
-	0, 0, 0, 7, 0, 7, 0, 7, 
-	0, 3, 0, 3, 7, 5, 5, 5, 
-	0, 7, 0, 0, 0, 7, 0, 7, 
-	0, 3, 0, 3, 7, 5, 5, 5, 
-	0, 7, 0, 0, 0, 7, 0, 7, 
-	1, 0, 1, 0, 0, 0, 26, 15, 
-	18, 9, 22, 12, 0
+	0, 0, 0, 0, 7, 0, 3, 0, 
+	3, 7, 5, 5, 5, 0, 7, 0, 
+	0, 0, 7, 0, 7, 0, 7, 0, 
+	7, 0, 3, 0, 3, 7, 5, 5, 
+	5, 0, 7, 0, 0, 0, 7, 0, 
+	7, 0, 3, 0, 3, 7, 5, 5, 
+	5, 0, 7, 0, 0, 0, 7, 0, 
+	7, 1, 0, 1, 0, 0, 0, 29, 
+	15, 33, 18, 21, 9, 25, 12, 0
 };
 
 static const char _moneo_parser_eof_actions[] = {
 	0, 7, 7, 7, 7, 7, 7, 7, 
-	7, 7, 7, 7, 0, 1, 1, 26, 
-	18, 22
+	7, 7, 7, 7, 7, 7, 7, 7, 
+	0, 1, 1, 29, 33, 21, 25
 };
 
-static const int moneo_parser_start = 12;
-static const int moneo_parser_first_final = 12;
+static const int moneo_parser_start = 16;
+static const int moneo_parser_first_final = 16;
 static const int moneo_parser_error = 0;
 
-static const int moneo_parser_en_main = 12;
+static const int moneo_parser_en_main = 16;
 
 
-#line 128 "MoneoParser.m.rl"
+#line 158 "MoneoParser.m.rl"
 
 @interface MoneoParser ()
 
@@ -118,21 +128,17 @@ static const int moneo_parser_en_main = 12;
 
 @synthesize cs = cs;
 
-+ (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error {
-  MoneoParser *parser = [[self alloc] init];
-  return [parser parseTemplate:input error:error];
-}
-
 - (instancetype)init {
   self = [super init];
   if( self ) {
+    _error = nil;
     
-#line 131 "MoneoParser.m"
+#line 137 "MoneoParser.m"
 	{
 	cs = moneo_parser_start;
 	}
 
-#line 157 "MoneoParser.m.rl"
+#line 183 "MoneoParser.m.rl"
   }
   return self;
 }
@@ -145,7 +151,7 @@ static const int moneo_parser_en_main = 12;
   _chunk_start = p;
   char *eof = pe;
   
-#line 149 "MoneoParser.m"
+#line 155 "MoneoParser.m"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -219,13 +225,13 @@ _match:
 		switch ( *_acts++ )
 		{
 	case 0:
-#line 31 "MoneoParser.m.rl"
+#line 33 "MoneoParser.m.rl"
 	{
     _chunk_start = p;
   }
 	break;
 	case 1:
-#line 35 "MoneoParser.m.rl"
+#line 37 "MoneoParser.m.rl"
 	{
     long length = p - _chunk_start;
     char buffer[length+1];
@@ -236,62 +242,82 @@ _match:
     if( ![_chunk isEqualToString:@""] ) {
        MoneoEmitNode *node = [[MoneoEmitNode alloc] initWithParent:_curBlock chunk:_chunk];
         [_curBlock addChild:node];
-//        NSLog( @">CHUNK = %@", _chunk );
+        #ifdef DEBUG_LOG
+        NSLog( @">CHUNK = %@", _chunk );
+        #endif
     }
     _chunk_start = p;
   }
 	break;
 	case 2:
-#line 50 "MoneoParser.m.rl"
+#line 54 "MoneoParser.m.rl"
 	{
     _keypath_start = p;
   }
 	break;
 	case 3:
-#line 54 "MoneoParser.m.rl"
+#line 58 "MoneoParser.m.rl"
 	{
     long length = p - _keypath_start;
     char buffer[length+1];
     memset( buffer, 0x00, length+1 );
     strncpy( buffer, _keypath_start, p-_keypath_start );
     _keypath = [[NSString alloc] initWithCString:buffer encoding:NSUTF8StringEncoding];
-//    NSLog( @"*KEYPATH = %@", _keypath );
+    #ifdef DEBUG_LOG
+    NSLog( @"*KEYPATH = %@", _keypath );
+    #endif
   }
 	break;
 	case 4:
-#line 63 "MoneoParser.m.rl"
+#line 69 "MoneoParser.m.rl"
 	{
-//    NSLog( @"*eval*" );
     MoneoEvalNode *node = [[MoneoEvalNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
-//    NSLog( @"curBlock=%@", _curBlock );
+    #ifdef DEBUG_LOG
+    NSLog( @"*EVAL* curBlock=%@", _curBlock );
+    #endif
   }
 	break;
 	case 5:
-#line 70 "MoneoParser.m.rl"
+#line 77 "MoneoParser.m.rl"
 	{
-//    NSLog( @"*iter:%@*", _keypath );
     MoneoIterNode *node = [[MoneoIterNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
     _curBlock = node;
-//    NSLog( @"curBlock=%@", _curBlock );
+    #ifdef DEBUG_LOG
+    NSLog( @"*ITER* curBlock=%@", _curBlock );
+    #endif
   }
 	break;
 	case 6:
-#line 78 "MoneoParser.m.rl"
+#line 86 "MoneoParser.m.rl"
 	{
-//    NSLog( @"*clblk*" );
-    _curBlock = _curBlock.parent;
-//    NSLog( @"curBlock=%@", _curBlock );
+    MoneoMissingNode *node = [[MoneoMissingNode alloc] initWithParent:_curBlock keyPath:_keypath];
+    [_curBlock addChild:node];
+    _curBlock = node;
+    #ifdef DEBUG_LOG
+    NSLog( @"*MISS* curBlock=%@", _curBlock );
+    #endif
   }
 	break;
 	case 7:
-#line 84 "MoneoParser.m.rl"
+#line 95 "MoneoParser.m.rl"
 	{
-    NSLog( @"ERROR" );
+    _curBlock = _curBlock.parent;
   }
 	break;
-#line 295 "MoneoParser.m"
+	case 8:
+#line 99 "MoneoParser.m.rl"
+	{
+    self.error = [NSError errorWithDomain:@"Moneo"
+                                     code:MoneoParsingTemplateError
+                                 userInfo:@{NSLocalizedDescriptionKey:@"Template did not parse correctly."}];
+                                 #ifdef DEBUG_LOG
+                                 NSLog( @"*ERROR*" );
+                                 #endif
+  }
+	break;
+#line 321 "MoneoParser.m"
 		}
 	}
 
@@ -308,13 +334,13 @@ _again:
 	while ( __nacts-- > 0 ) {
 		switch ( *__acts++ ) {
 	case 0:
-#line 31 "MoneoParser.m.rl"
+#line 33 "MoneoParser.m.rl"
 	{
     _chunk_start = p;
   }
 	break;
 	case 1:
-#line 35 "MoneoParser.m.rl"
+#line 37 "MoneoParser.m.rl"
 	{
     long length = p - _chunk_start;
     char buffer[length+1];
@@ -325,45 +351,63 @@ _again:
     if( ![_chunk isEqualToString:@""] ) {
        MoneoEmitNode *node = [[MoneoEmitNode alloc] initWithParent:_curBlock chunk:_chunk];
         [_curBlock addChild:node];
-//        NSLog( @">CHUNK = %@", _chunk );
+        #ifdef DEBUG_LOG
+        NSLog( @">CHUNK = %@", _chunk );
+        #endif
     }
     _chunk_start = p;
   }
 	break;
 	case 4:
-#line 63 "MoneoParser.m.rl"
+#line 69 "MoneoParser.m.rl"
 	{
-//    NSLog( @"*eval*" );
     MoneoEvalNode *node = [[MoneoEvalNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
-//    NSLog( @"curBlock=%@", _curBlock );
+    #ifdef DEBUG_LOG
+    NSLog( @"*EVAL* curBlock=%@", _curBlock );
+    #endif
   }
 	break;
 	case 5:
-#line 70 "MoneoParser.m.rl"
+#line 77 "MoneoParser.m.rl"
 	{
-//    NSLog( @"*iter:%@*", _keypath );
     MoneoIterNode *node = [[MoneoIterNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
     _curBlock = node;
-//    NSLog( @"curBlock=%@", _curBlock );
+    #ifdef DEBUG_LOG
+    NSLog( @"*ITER* curBlock=%@", _curBlock );
+    #endif
   }
 	break;
 	case 6:
-#line 78 "MoneoParser.m.rl"
+#line 86 "MoneoParser.m.rl"
 	{
-//    NSLog( @"*clblk*" );
-    _curBlock = _curBlock.parent;
-//    NSLog( @"curBlock=%@", _curBlock );
+    MoneoMissingNode *node = [[MoneoMissingNode alloc] initWithParent:_curBlock keyPath:_keypath];
+    [_curBlock addChild:node];
+    _curBlock = node;
+    #ifdef DEBUG_LOG
+    NSLog( @"*MISS* curBlock=%@", _curBlock );
+    #endif
   }
 	break;
 	case 7:
-#line 84 "MoneoParser.m.rl"
+#line 95 "MoneoParser.m.rl"
 	{
-    NSLog( @"ERROR" );
+    _curBlock = _curBlock.parent;
   }
 	break;
-#line 367 "MoneoParser.m"
+	case 8:
+#line 99 "MoneoParser.m.rl"
+	{
+    self.error = [NSError errorWithDomain:@"Moneo"
+                                     code:MoneoParsingTemplateError
+                                 userInfo:@{NSLocalizedDescriptionKey:@"Template did not parse correctly."}];
+                                 #ifdef DEBUG_LOG
+                                 NSLog( @"*ERROR*" );
+                                 #endif
+  }
+	break;
+#line 411 "MoneoParser.m"
 		}
 	}
 	}
@@ -371,13 +415,15 @@ _again:
 	_out: {}
 	}
 
-#line 169 "MoneoParser.m.rl"
+#line 195 "MoneoParser.m.rl"
   return template;
 }
 
-- (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error {
+- (MoneoTemplate *)parseTemplate:(NSString *)input {
   if( input == nil ) {
-    *error = [NSError errorWithDomain:@"Moneo" code:MoneoNilTemplateError userInfo:@{NSLocalizedDescriptionKey:@"Template 'input' parameter may not be nil."}];
+    self.error = [NSError errorWithDomain:@"Moneo"
+                                code:MoneoNilTemplateError
+                            userInfo:@{NSLocalizedDescriptionKey:@"Template 'input' parameter may not be nil."}];
     return nil;
   }
   const char *buffer = [input cStringUsingEncoding:NSUTF8StringEncoding];

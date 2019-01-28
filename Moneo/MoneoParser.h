@@ -10,14 +10,15 @@
 
 typedef enum {
   MoneoNilTemplateError,
+  MoneoParsingTemplateError,
 } MoneoErrorCodes;
 
 @class MoneoTemplate;
 
 @interface MoneoParser : NSObject
 
-+ (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error;
+@property NSError *error;
 
-- (MoneoTemplate *)parseTemplate:(NSString *)input error:(NSError **)error;
+- (MoneoTemplate *)parseTemplate:(NSString *)input;
 
 @end

@@ -29,9 +29,9 @@
 
 - (void)testRenderSimpleEmit {
   MoneoParser *p = [[MoneoParser alloc] init];
-  NSError *error = nil;
-  MoneoTemplate *t = [p parseTemplate:@"<p>The quality of mercy is not strained.</p>" error:&error];
+  MoneoTemplate *t = [p parseTemplate:@"<p>The quality of mercy is not strained.</p>"];
   XCTAssertNotNil( t );
+  XCTAssertNil( p.error );
 
   NSString *output = [t render:nil];
   XCTAssertEqualObjects( output, @"<p>The quality of mercy is not strained.</p>" );
@@ -40,9 +40,9 @@
 
 - (void)testRenderEval {
   MoneoParser *p = [[MoneoParser alloc] init];
-  NSError *error = nil;
-  MoneoTemplate *t = [p parseTemplate:@"<p>{{=text}}</p>" error:&error];
+  MoneoTemplate *t = [p parseTemplate:@"<p>{{=text}}</p>"];
   XCTAssertNotNil( t );
+  XCTAssertNil( p.error );
 
   NSString *output = [t render:@{@"text":@"foo"}];
   XCTAssertEqualObjects( output, @"<p>foo</p>" );
@@ -51,9 +51,9 @@
 
 - (void)testRenderIter {
   MoneoParser *p = [[MoneoParser alloc] init];
-  NSError *error = nil;
-  MoneoTemplate *t = [p parseTemplate:@"<ul>{{@items}}<li>{{=name}}</li>{{/}}</ul>" error:&error];
+  MoneoTemplate *t = [p parseTemplate:@"<ul>{{@items}}<li>{{=name}}</li>{{/}}</ul>"];
   XCTAssertNotNil( t );
+  XCTAssertNil( p.error );
 
   NSString *output = [t render:@{
                                  @"items":@[
@@ -65,31 +65,42 @@
   XCTAssertEqualObjects( (@[@"items",@"name"]), t.keyPaths );
 }
 
-- (void)testRenderMissing {
+- (void)testRenderMissingIsMissing {
   MoneoParser *p = [[MoneoParser alloc] init];
-  NSError *error = nil;
-  MoneoTemplate *t = [p parseTemplate:@"{{!items}}<p>No items</p>{{/}}" error:&error];
+  MoneoTemplate *t = [p parseTemplate:@"{{!items}}<p>No items</p>{{/}}"];
   XCTAssertNotNil( t );
+  XCTAssertNil( p.error );
 
   NSString *output = [t render:@{}];
   XCTAssertEqualObjects( output, @"<p>No items</p>" );
   XCTAssertEqualObjects( (@[@"items"]), t.keyPaths );
 }
 
+- (void)testRenderMissingIsPresent {
+  MoneoParser *p = [[MoneoParser alloc] init];
+  MoneoTemplate *t = [p parseTemplate:@"{{!items}}<p>No items</p>{{/}}"];
+  XCTAssertNotNil( t );
+  XCTAssertNil( p.error );
+
+  NSString *output = [t render:@{@"items":@[@"Hello World"]}];
+  XCTAssertEqualObjects( output, @"" );
+  XCTAssertEqualObjects( (@[@"items"]), t.keyPaths );
+}
+
 
 - (void)testParseKeyPath {
   MoneoParser *p = [[MoneoParser alloc] init];
-  NSError *error = nil;
-  MoneoTemplate *t = [p parseTemplate:@"{{=$foo/bar.textValue}}" error:&error];
+  MoneoTemplate *t = [p parseTemplate:@"{{=$foo/bar.textValue}}"];
   XCTAssertNotNil( t, @"Unable to parse template with complex keyPath" );
+  XCTAssertNil( p.error );
   XCTAssertEqualObjects( @[@"$foo/bar.textValue"], t.keyPaths );
 }
 
 - (void)testPerformanceExample {
   MoneoParser *p = [[MoneoParser alloc] init];
-  NSError *error = nil;
-  MoneoTemplate *t = [p parseTemplate:@"<ul>{{@items}}<li>{{=name}}</li>{{/}}</ul>" error:&error];
+  MoneoTemplate *t = [p parseTemplate:@"<ul>{{@items}}<li>{{=name}}</li>{{/}}</ul>"];
   XCTAssertNotNil( t );
+  XCTAssertNil( p.error );
 
   // This is an example of a performance test case.
   [self measureBlock:^{
