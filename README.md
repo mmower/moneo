@@ -4,20 +4,20 @@ An Objective-C template parsing and rendering framework.
 
 ## Motivation
 
-Moneo exists for four reasons
+Moneo exists for four reasons:
 
 * I was using existing Mustache libraries however they were either not well maintained, not Objective-C friendly, or both.
 * Mustache contains a number of features that did not make sense in my context and created possible edge-cases I didn't want to have to deal with.
 * I needed to know what expressions are being used in a template and none of the Mustache processors provided easy access to that meaning I was going to have to hack them or write my own parser to pull that info out.
-* I'm rendering a lot of smallish templates very often, I need it as fast as possible. Moneo uses a Ragel generated parser and does its best to reduce templates into a fast form for rendering (in the future we might explore other representations and even using the `tcc` library to dynamically generate rendering functions).
+* I'm rendering a lot of smallish templates very often, I need it as fast as possible. Moneo uses a [Ragel](http://www.colm.net/open-source/ragel/) generated parser and does its best to reduce templates into a fast form for rendering. At the moment this means transforming into blocks that append to an NSMutableString. Peformance is reasonably dependent on cost of keypath evaluation and calls to -appendString. In the future we might explore other representations and perhaps using something like the [tcc](https://bellard.org/tcc/) library to dynamically generate rendering functions.
 
 ## Important
 
-Moneo is very much a work in progress. It's on Github because I wanted to check that I could include it in my app, Mentat, using Carthage. Template parsing is mostly complete but rendering is currently implemented using an AST walk and keypath evaluation is kind of hazy.
+Moneo is a work in progress. It's essentially feature complete but implemented to a level that supports my forthcoming app, Mentat. YMMV.
 
 ## Installation
 
-I use Carthage and Moneo should be very simple to install by adding to your Cartfile and using `cathage update`. I'm building on macOS I've no reason to suppose the the current version of Moneo wouldn't work on iOS but I haven't tried it.
+I use Carthage and Moneo should be very simple to install by adding the repo to your `Cartfile` and using `cathage update`. I'm building on macOS I've no reason to suppose the the current version of Moneo wouldn't work on iOS but I haven't tried it.
 
 ## Usage
 
@@ -27,7 +27,7 @@ I use Carthage and Moneo should be very simple to install by adding to your Cart
 - (NSSting *)renderEmail {
   MoneoParser *parser = [[MoneoParser alloc] init];
 
-  MoneoTemplate *template = [parse parse:@"<p>{{=email}}</p>"];
+  MoneoTemplate *template = [parse parse:@"<p>Email: {{=email}}</p>"];
   NSString *output = template.render( @{"email":@"matt@theartofnavigation.co.uk"} );
 }
 ~~~~
@@ -54,7 +54,7 @@ Example:
 
 ~~~~
 {{@<keypath>}}
-Something something
+<li>{{=email}}</li>
 {{/}}
 ~~~~
 
@@ -66,7 +66,7 @@ Example:
 
 ~~~~
 {{!<keypath>}}
-something something
+<p>Nothing to see here</p>
 {{/}}
 ~~~~
 
@@ -74,9 +74,10 @@ And that's it. There is no support for including other templates, reading templa
 
 ## Contexts
 
-Rendering happens in a context. This is passed to the `render` method of the `MoneoTemplate`.
+Rendering happens in a context. This is passed to the `render` method of the `MoneoTemplate`. Whenever one of the evaluation, iteration, or missing operators is used the associated `keypath` is resolved in the current context using the `NSKeyValueCoding` method `-valueForKeyPath:`. This allows specifying properties enclosed in objects within the context.
+
+Note that when using the iteration operator `{{@<keypath>}}` the context used when rendering within the contained content will be the series of 1 or more objects obtained from the keypath. 
 
 ## Error Handling
 
-Right now there is none. (See Notes above!)
-
+The `MoneoParser` has an `error` property which should be checked when parsing fails. Right now there is no diagnostic information about errors as I'm still trying to figure out how you embed this information using Ragel!
