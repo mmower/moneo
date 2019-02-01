@@ -99,12 +99,13 @@
 - (void)testPerformanceExample {
   MoneoParser *p = [[MoneoParser alloc] init];
   MoneoTemplate *t = [p parseTemplate:@"<ul>{{@items}}<li>{{=name}}</li>{{/}}</ul>"];
+  t.bufferSize = 128;
   XCTAssertNotNil( t );
   XCTAssertNil( p.error );
 
   // This is an example of a performance test case.
   [self measureBlock:^{
-    for( int i = 0; i < 1000; i++ ) {
+    for( int i = 0; i < 10000; i++ ) {
     NSString *output = [t render:@{
                                    @"items":@[
                                        @{@"name":@"Ted"},

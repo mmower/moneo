@@ -14,6 +14,7 @@
 
 @property NSArray *compiled;
 @property NSArray *keyPaths;
+@property NSUInteger bufferSize;
 
 - (instancetype)initWithAST:(MoneoTemplateNode *)templateNode;
 

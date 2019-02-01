@@ -20,6 +20,7 @@ typedef void (^OpBlock)( NSMutableString *output, id context );
     NSMutableArray *keyPaths = [NSMutableArray array];
     _compiled = [self compileBlockNode:templateNode keyPathsOut:keyPaths];
     _keyPaths = [keyPaths copy];
+    _bufferSize = 1024;
   }
   return self;
 }
@@ -69,7 +70,7 @@ typedef void (^OpBlock)( NSMutableString *output, id context );
 }
 
 - (NSString *)renderTree:(NSArray *)tree context:(id)context {
-  NSMutableString *output = [NSMutableString string];
+  NSMutableString *output = [NSMutableString stringWithCapacity:_bufferSize];
 
   for( OpBlock op in tree ) {
     op( output, context );
