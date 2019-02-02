@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C93C14992205AEB900221972 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C93C14982205AEB900221972 /* LICENSE */; };
 		C97C104421F144D600D9D147 /* Moneo.h in Headers */ = {isa = PBXBuildFile; fileRef = C97C104221F144D600D9D147 /* Moneo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C97C104E21F1456000D9D147 /* MoneoParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C97C104A21F1455F00D9D147 /* MoneoParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C97C104F21F1456000D9D147 /* MoneoASTNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C97C104B21F1456000D9D147 /* MoneoASTNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C93C14982205AEB900221972 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		C97C103F21F144D600D9D147 /* Moneo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Moneo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C104221F144D600D9D147 /* Moneo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Moneo.h; sourceTree = "<group>"; };
 		C97C104321F144D600D9D147 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				C97C105821F1FD6200D9D147 /* MoneoTemplate.h */,
 				C97C105921F1FD6200D9D147 /* MoneoTemplate.m */,
 				C97C105721F1E9F100D9D147 /* README.md */,
+				C93C14982205AEB900221972 /* LICENSE */,
 			);
 			path = Moneo;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C93C14992205AEB900221972 /* LICENSE in Resources */,
 				C97C105121F1456000D9D147 /* MoneoParser.m.rl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
