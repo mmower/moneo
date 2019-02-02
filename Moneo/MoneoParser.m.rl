@@ -26,9 +26,9 @@
   close = '}' :> '}';
   keypath = ( alnum | graph )+ -- '}';
   eval = [=];
-  iter = '@';
+  iter = '*';
   cblk = '/';
-  miss = '!';
+  miss = '-';
 
   action mark {
     _chunk_start = fpc;

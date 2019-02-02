@@ -38,35 +38,37 @@ If you are familiar with Mustache, Moneo will hold no suprises. I changed the si
 
 ### Evaluate
 
-To evaluate a value use `{{=<keypath>}}` where `<keypath>` is a key in the context.
+Use the `=` operator to evalute a value in the current context. Where  `{{=<keypath>}}` looks up `<keypath>` in the rendering context.
 
 Example:
 
 ~~~~
-{{=<keypath>}}
+{{=name}}
 ~~~~
 
 ### Iterate
 
-Iterate determines whether a key has a value or not. If it does it treats a single value as a 1-element list. It then iterates the list interpreting everything up to the enclosing `{{/}}` for each value of the list.
+Use the `*` operator to iterate on a keypath. It gets the value for the keypath in the current context and determines if its a list or not. If not it treats a single value as a 1-element list. It then iterates the list interpreting everything up to the enclosing `{{/}}` for each value of the list.
 
 Example:
 
 ~~~~
-{{@<keypath>}}
-<li>{{=email}}</li>
+<ul>
+{{*email_addresses}}
+<li>{{=address}}</li>
 {{/}}
+</ul>
 ~~~~
 
 ### Missing
 
-Missing determines whether a key has a value or not. If it does it emits nothing, otherwise it evaluates everything up to the enclosing `{{/}}`.
+Use the `-` operator to detemine if  a keypath is missing. If it is not, the operator nothing, otherwise it evaluates everything up to the enclosing `{{/}}`.
 
 Example:
 
 ~~~~
-{{!<keypath>}}
-<p>Nothing to see here</p>
+{{-email_addresses}}
+<p>User has no email addresses.</p>
 {{/}}
 ~~~~
 

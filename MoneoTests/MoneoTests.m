@@ -61,7 +61,7 @@
 
 - (void)testRenderIter {
   MoneoParser *p = [[MoneoParser alloc] init];
-  MoneoTemplate *t = [p parseTemplate:@"<ul>{{@items}}<li>{{=name}}</li>{{/}}</ul>"];
+  MoneoTemplate *t = [p parseTemplate:@"<ul>{{*items}}<li>{{=name}}</li>{{/}}</ul>"];
   XCTAssertNotNil( t );
   XCTAssertNil( p.error );
 
@@ -77,7 +77,7 @@
 
 - (void)testRenderMissingIsMissing {
   MoneoParser *p = [[MoneoParser alloc] init];
-  MoneoTemplate *t = [p parseTemplate:@"{{!items}}<p>No items</p>{{/}}"];
+  MoneoTemplate *t = [p parseTemplate:@"{{-items}}<p>No items</p>{{/}}"];
   XCTAssertNotNil( t );
   XCTAssertNil( p.error );
 
@@ -88,7 +88,7 @@
 
 - (void)testRenderMissingIsPresent {
   MoneoParser *p = [[MoneoParser alloc] init];
-  MoneoTemplate *t = [p parseTemplate:@"{{!items}}<p>No items</p>{{/}}"];
+  MoneoTemplate *t = [p parseTemplate:@"{{-items}}<p>No items</p>{{/}}"];
   XCTAssertNotNil( t );
   XCTAssertNil( p.error );
 
@@ -108,7 +108,7 @@
 
 - (void)testPerformanceExample {
   MoneoParser *p = [[MoneoParser alloc] init];
-  MoneoTemplate *t = [p parseTemplate:@"<ul>{{@items}}<li>{{=name}}</li>{{/}}</ul>"];
+  MoneoTemplate *t = [p parseTemplate:@"<ul>{{*items}}<li>{{=name}}</li>{{/}}</ul>"];
   t.bufferSize = 128;
   XCTAssertNotNil( t );
   XCTAssertNil( p.error );
