@@ -36,7 +36,10 @@ typedef void (^OpBlock)( NSMutableString *output, id context );
     } else if( [child isKindOfClass:[MoneoEvalNode class]] ) {
       NSString *keyPath = ((MoneoEvalNode *)child).keyPath;
       [compiled addObject:^( NSMutableString *output, id context ) {
-        [output appendString:[context valueForKeyPath:keyPath]];
+        id value = [context valueForKeyPath:keyPath];
+        if( value ) {
+          [output appendString:value];
+        }
       }];
       [keyPaths addObject:keyPath];
     } else if( [child isKindOfClass:[MoneoIterNode class]] ) {

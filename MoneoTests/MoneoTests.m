@@ -49,6 +49,16 @@
   XCTAssertEqualObjects( @[@"text"], t.keyPaths );
 }
 
+- (void)testEvalNothing {
+  MoneoParser *p = [[MoneoParser alloc] init];
+  MoneoTemplate *t = [p parseTemplate:@"<p>{{=text}}</p>"];
+  XCTAssertNotNil( t );
+  XCTAssertNil( p.error );
+
+  NSString *output = [t render:@{}];
+  XCTAssertEqualObjects( output, @"<p></p>" );
+}
+
 - (void)testRenderIter {
   MoneoParser *p = [[MoneoParser alloc] init];
   MoneoTemplate *t = [p parseTemplate:@"<ul>{{@items}}<li>{{=name}}</li>{{/}}</ul>"];
