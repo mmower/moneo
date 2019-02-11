@@ -36,9 +36,13 @@ typedef void (^OpBlock)( NSMutableString *output, id context );
     } else if( [child isKindOfClass:[MoneoEvalNode class]] ) {
       NSString *keyPath = ((MoneoEvalNode *)child).keyPath;
       [compiled addObject:^( NSMutableString *output, id context ) {
-        id value = [context valueForKeyPath:keyPath];
-        if( value ) {
-          [output appendString:value];
+        @try {
+          id value = [context valueForKeyPath:keyPath];
+          if( value ) {
+            [output appendString:value];
+          }
+        } @catch(NSException *ex) {
+          [output appendString:[NSString stringWithFormat:@"** Error: undefined key %@ used in template **",keyPath]];
         }
       }];
       [keyPaths addObject:keyPath];
@@ -47,13 +51,17 @@ typedef void (^OpBlock)( NSMutableString *output, id context );
       [keyPaths addObject:keyPath];
       NSArray *compiledChildren = [self compileBlockNode:((MoneoIterNode *)child) keyPathsOut:keyPaths];
       [compiled addObject:^( NSMutableString *output, id context ) {
-        id obj = [context valueForKeyPath:keyPath];
-        if( [obj conformsToProtocol:@protocol(NSFastEnumeration)] ) {
-          for( id item in obj ) {
-            [output appendString:[self renderTree:compiledChildren context:item]];
+        @try {
+          id obj = [context valueForKeyPath:keyPath];
+          if( [obj conformsToProtocol:@protocol(NSFastEnumeration)] ) {
+            for( id item in obj ) {
+              [output appendString:[self renderTree:compiledChildren context:item]];
+            }
+          } else {
+            [output appendString:[self renderTree:compiledChildren context:obj]];
           }
-        } else {
-          [output appendString:[self renderTree:compiledChildren context:obj]];
+        } @catch( NSException *ex ) {
+          [output appendString:[NSString stringWithFormat:@"** Error: undefined key %@ used in template **",keyPath]];
         }
       }];
     } else if( [child isKindOfClass:[MoneoMissingNode class]] ) {
@@ -61,9 +69,13 @@ typedef void (^OpBlock)( NSMutableString *output, id context );
       [keyPaths addObject:keyPath];
       NSArray *compiledChildren = [self compileBlockNode:((MoneoIterNode *)child) keyPathsOut:keyPaths];
       [compiled addObject:^( NSMutableString *output, id context ) {
-        id obj = [context valueForKeyPath:keyPath];
-        if( !obj ) {
-          [output appendString:[self renderTree:compiledChildren context:context]];
+        @try {
+          id obj = [context valueForKeyPath:keyPath];
+          if( !obj ) {
+            [output appendString:[self renderTree:compiledChildren context:context]];
+          }
+        } @catch( NSException *ex ) {
+          [output appendString:[NSString stringWithFormat:@"** Error: undefined key %@ used in template **",keyPath]];
         }
       }];
     }
