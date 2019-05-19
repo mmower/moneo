@@ -97,6 +97,25 @@
   XCTAssertEqualObjects( (@[@"items"]), t.keyPaths );
 }
 
+- (void)testExistsFalse {
+  MoneoParser *p = [[MoneoParser alloc] init];
+  MoneoTemplate *t = [p parseTemplate:@"{{?item}}{{=item}}{{/}}"];
+  XCTAssertNotNil( t );
+  XCTAssertNil( p.error );
+
+  NSString *output = [t render:@{}];
+  XCTAssertEqualObjects( output, @"" );
+}
+
+- (void)testExistsTrue {
+  MoneoParser *p = [[MoneoParser alloc] init];
+  MoneoTemplate *t = [p parseTemplate:@"{{?item}}{{=item}}{{/}}"];
+  XCTAssertNotNil( t );
+  XCTAssertNil( p.error );
+
+  NSString *output = [t render:@{@"item":@"foo"}];
+  XCTAssertEqualObjects( output, @"foo" );
+}
 
 - (void)testParseKeyPath {
   MoneoParser *p = [[MoneoParser alloc] init];

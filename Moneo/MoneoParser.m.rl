@@ -26,6 +26,7 @@
   close = '}' :> '}';
   keypath = ( alnum | graph )+ -- '}';
   eval = [=];
+  exist = '?';
   iter = '*';
   cblk = '/';
   miss = '-';
@@ -74,6 +75,14 @@
     #endif
   }
 
+  action exist {
+    MoneoExistsNode *node = [[MoneoExistsNode alloc] initWithParent:_curBlock keyPath:_keypath];
+    [_curBlock addChild:node];
+    #ifdef DEBUG_LOG
+    NSLog( @"*EVAL* curBlock=%@", _curBlock );
+    #endif
+  }
+
   action iter {
     MoneoIterNode *node = [[MoneoIterNode alloc] initWithParent:_curBlock keyPath:_keypath];
     [_curBlock addChild:node];
@@ -114,6 +123,15 @@
     close %eval %mark
   ) >chunk_end;
 
+  exist_block = (
+    open
+    exist
+    space*
+    keypath >keypath_start %keypath_end
+    space*
+    close %exist %mark
+    ) >chunk_end;
+
   iter_block = (
     open
     iter
@@ -146,6 +164,7 @@
     eval_block
     | iter_block
     | miss_block
+    | exist_block
     | close_block
     | chunk
   ) %eof(chunk_end);

@@ -86,6 +86,18 @@
 
 @end
 
+@implementation MoneoExistsNode
+
+- (instancetype)initWithParent:(MoneoBlockNode *)parent keyPath:(NSString *)keyPath {
+  self = [self initWithParent:parent];
+  if( self ) {
+    _keyPath = keyPath;
+  }
+  return self;
+}
+
+@end
+
 @implementation MoneoMissingNode
 
 - (instancetype)initWithParent:(MoneoBlockNode *)parent keyPath:(NSString *)keyPath {

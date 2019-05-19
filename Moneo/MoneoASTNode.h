@@ -54,6 +54,14 @@
 
 @end
 
+@interface MoneoExistsNode : MoneoBlockNode
+
+@property NSString *keyPath;
+
+- (instancetype)initWithParent:(MoneoBlockNode *)parent keyPath:(NSString *)keyPath;
+
+@end
+
 @interface MoneoMissingNode : MoneoBlockNode
 
 @property NSString *keyPath;
