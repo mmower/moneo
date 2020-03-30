@@ -60,6 +60,21 @@ Example:
 </ul>
 ~~~~
 
+### Exists
+
+Use the `?` operator to determine if a keypath is present. If it is, the contained block is evaluated, otherwise no output is generated.
+
+Example:
+
+~~~~
+<ul>
+{{?url}}
+<li><a href="{{=url}}">Link</a>
+{{/}}
+<li>Something else.</li>
+</ul>
+~~~~
+
 ### Missing
 
 Use the `-` operator to detemine if  a keypath is missing. If it is not, the operator nothing, otherwise it evaluates everything up to the enclosing `{{/}}`.
@@ -78,7 +93,7 @@ And that's it. There is no support for including other templates, reading templa
 
 Rendering happens in a context. This is passed to the `render` method of the `MoneoTemplate`. Whenever one of the evaluation, iteration, or missing operators is used the associated `keypath` is resolved in the current context using the `NSKeyValueCoding` method `-valueForKeyPath:`. This allows specifying properties enclosed in objects within the context.
 
-Note that when using the iteration operator `{{@<keypath>}}` the context used when rendering within the contained content will be the series of 1 or more objects obtained from the keypath. 
+Note that when using the iteration operator `{{*<keypath>}}` the context used when rendering within the contained content will be the series of 1 or more objects obtained from the keypath. 
 
 ## Error Handling
 

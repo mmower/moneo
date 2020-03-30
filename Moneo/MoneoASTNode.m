@@ -8,6 +8,9 @@
 
 #import "MoneoASTNode.h"
 
+/*
+ * The MoneoASTNode is the root node for all AST node types.
+ */
 @implementation MoneoASTNode
 
 - (instancetype)initWithParent:(MoneoBlockNode *)parent {
@@ -20,6 +23,10 @@
 
 @end
 
+/*
+ * The MoneoEmitNode describes a static chunk of text that the template will
+ * emit during rendering.
+ */
 @implementation MoneoEmitNode
 
 - (instancetype)initWithParent:(MoneoBlockNode *)parent chunk:(NSString *)chunk {
@@ -36,6 +43,10 @@
 
 @end
 
+/*
+ * The MoneoEvalNode describes a key path that the template will use to find
+ * a value from the context that gets emitted during rendering
+ */
 @implementation MoneoEvalNode
 
 - (instancetype)initWithParent:(MoneoBlockNode *)parent keyPath:(NSString *)keyPath {
@@ -53,6 +64,10 @@
 
 @end
 
+/*
+ * A MoneoBlockNode is the root node of types that represent a block with a child
+ * block that can be rendered zero or more times.
+ */
 @implementation MoneoBlockNode
 
 - (instancetype)initWithParent:(MoneoBlockNode *)parent {
@@ -73,6 +88,10 @@
 
 @end
 
+/*
+ * The MoneoTemplateNode is a type of block node, it represents the complete
+ * template that is passed to the MoneoTemplate class for rendering.
+ */
 @implementation MoneoTemplateNode
 
 - (instancetype)init {
@@ -86,6 +105,10 @@
 
 @end
 
+/*
+ * The MoneoExistsNode is a type of block node that can be used to evaluate whether
+ * a key path exists within the context and evaluate its child node if it exists.
+ */
 @implementation MoneoExistsNode
 
 - (instancetype)initWithParent:(MoneoBlockNode *)parent keyPath:(NSString *)keyPath {
@@ -98,6 +121,11 @@
 
 @end
 
+/*
+ * The MoneoMissingBlock is a type of block node that can be used to evaluate whether
+ * a key path does not exist in the context and evaluate its child node if it
+ * is missing.
+ */
 @implementation MoneoMissingNode
 
 - (instancetype)initWithParent:(MoneoBlockNode *)parent keyPath:(NSString *)keyPath {
@@ -110,6 +138,11 @@
 
 @end
 
+/*
+ * The MoneoIterNode is a type of block node that represents a key path and a child
+ * node. When rendered the key path should evaluate to a (potentially empty) collection.
+ * The child node should then be rendered for each value in the collection.
+ */
 @implementation MoneoIterNode
 
 - (instancetype)initWithParent:(MoneoBlockNode *)parent keyPath:(NSString *)keyPath {
